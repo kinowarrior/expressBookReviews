@@ -3,10 +3,15 @@ const jwt = require('jsonwebtoken');
 let books = require("./booksdb.js");
 const regd_users = express.Router();
 
-let users = [];
+let users = [
+  {"username": "john","password": "smith"},
+  {"username": "joe","password": "bloggs"}
+];
 
 const isValid = (username)=>{ //returns boolean
-//write code to check is the username is valid
+  // Check if a user with the given username already exists in the users array
+  const userExists = users.some(user => user.username === username);
+  return !userExists; // Return true if username is NOT found (i.e., it's valid/available)
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
